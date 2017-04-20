@@ -9,5 +9,5 @@ RUN pip3 install -r /app/requirements.txt
 USER uwsgi
 EXPOSE 8080
 
-CMD ["uwsgi", "--module", "app", "--http", "0.0.0.0:8080"]
+CMD ["/bin/sh", "run.py"]
 
