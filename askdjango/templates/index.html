@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<title>AskDjango PhotoWall</title>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.7/journal/bootstrap.min.css" />
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+* { box-sizing: border-box; }
+html { overflow-y: scroll; }
+body { background-color: #ddd; }
+.navbar { border-radius: 0; margin-bottom: 0; }
+.grid {}
+.grid:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.grid-sizer, .grid-item { width: 33.3%; }
+.grid-item { float: left; }
+.grid-item img {
+    display: block;
+    max-width: 100%;
+}
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/masonry/4.1.1/masonry.pkgd.min.js"></script>
+<script src="//unpkg.com/imagesloaded@4.1.1/imagesloaded.pkgd.min.js"></script>
+<script>
+$(function() {
+    var $grid = $('.grid').masonry({
+        // set itemSelector so .grid-sizer is not used in layout
+        itemSelector: '.grid-item',
+        // use element for option
+        columnWidth: '.grid-sizer',
+        percentPosition: true
+    });
+});
+</script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">AskDjango PhotoWall</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url "new" %}">New Photos</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    <div class="grid">
+        <div class="grid-sizer"></div>
+        {% for post in post_list %}
+            <div class="grid-item">
+                <img src="{{ post.image.url }}" />
+            </div>
+        {% empty %}
+            <div class="alert alert-warning">
+                Empty Post
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+

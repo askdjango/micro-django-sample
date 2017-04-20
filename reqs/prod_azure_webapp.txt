@@ -1,0 +1,6 @@
+-r common.txt
+
+django-storages
+azure
+PyMySQL
+uwsgi
